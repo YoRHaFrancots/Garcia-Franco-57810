@@ -1,0 +1,85 @@
+{%extends "entidades/index.html"%}
+
+{% block titulo %}
+<div class="container px-4 px-lg-5 h-100">
+    <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
+        <div class="col-lg-8 align-self-end">
+            <h1 class="text-white font-weight-bold">Clientes</h1>
+            <hr class="divider" />
+        </div>
+        <div class="col-lg-8 align-self-baseline">
+            
+            {% if user.is_authenticated %}
+            <p class="text-white-75 mb-5">Tabla de clientes abajo</p>
+            <a class="btn btn-primary btn-xl" href="{%url 'clienteForm'%}">Toca aqui para agregar cliente como empleado</a>
+            {% else %}   
+            <p class="text-white-75 mb-5">¿Quieres ser un cliente?</p>
+            <a class="btn btn-primary btn-xl" href="{%url 'clienteForm'%}">Toca aqui</a>
+            {% endif %}
+                
+           
+
+           
+            
+        </div>
+    </div>
+</div>
+{% endblock titulo %}
+
+{% block contenido %}
+
+{% if user.is_authenticated %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Apellido</th>
+            <th>Email</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for c in clientes %}
+        <tr>
+            <td>{{ c.id }}</td>
+            <td>{{ c.nombre }}</td>
+            <td>{{ c.apellido }}</td>
+            <td>{{ c.email }}</td>
+            <td>
+
+                <a
+
+                  href="{%url 'clienteUpdate' c.id%}"
+
+                  class="btn btn-primary"
+
+                  style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+
+                  ><i class="fa fa-edit fa-sm" title="Edit Record"></i>
+
+                </a>
+
+                <a
+
+                  href="{%url 'clienteDelete' c.id%}"
+
+                  class="btn btn-danger"
+
+                  style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+
+                  ><i class="fa fa-trash fa-sm" title="Delete Record"></i>
+
+                </a>                
+
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endif %}
+    
+
+{% endblock contenido %}
+    
+    

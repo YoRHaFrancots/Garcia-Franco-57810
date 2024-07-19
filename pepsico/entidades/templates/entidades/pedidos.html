@@ -1,0 +1,72 @@
+{%extends "entidades/index.html"%}
+
+{% block titulo %}
+<div class="container px-4 px-lg-5 h-100">
+    <div class="row gx-4 gx-lg-5 h-100 align-items-center justify-content-center text-center">
+        <div class="col-lg-8 align-self-end">
+            <h1 class="text-white font-weight-bold">Cargar Pedidos</h1>
+            <hr class="divider" />
+        </div>
+        <div class="col-lg-8 align-self-baseline">
+            
+            <a class="btn btn-primary btn-xl" href="{%url 'pedidoForm'%}">Ingresa pedido del cliente</a>
+            <p class="text-white-75 mt-5">Pedidos cargados abajo</p>
+           
+            
+        </div>
+    </div>
+</div>
+{% endblock titulo %}
+
+{% block contenido %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Descripcion</th>
+            <th>Direccion</th>
+            <th>Fecha de entrega</th>
+            <th>Entrega</th>
+            <th>Acciones</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for p in pedidos %}
+        <tr>
+            <td>{{ p.id }}</td>
+            <td>{{ p.descripcion }}</td>
+            <td>{{ p.direccion }}</td>
+            <td>{{ p.fechaEntrega }}</td>
+            <td>{{ p.entregado}}</td>
+            <td>
+
+                <a
+
+                  href="{%url 'pedidoUpdate' p.id%}"
+
+                  class="btn btn-primary"
+
+                  style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+
+                  ><i class="fa fa-edit fa-sm" title="Edit Record"></i>
+
+                </a>
+
+                <a
+
+                  href="{%url 'pedidoDelete' p.id%}"
+
+                  class="btn btn-danger"
+
+                  style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem;"
+
+                  ><i class="fa fa-trash fa-sm" title="Delete Record"></i>
+
+                </a>                
+
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+{% endblock contenido %}
