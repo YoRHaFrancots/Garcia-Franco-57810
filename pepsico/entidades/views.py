@@ -12,6 +12,8 @@ from django.contrib.auth.decorators import login_required
 
 def home(request):
     return render(request,"entidades/index.html")
+def about(request):
+    return render(request,"entidades/about.html")
 def clientes(request):
     contexto={"clientes":Cliente.objects.all()}
     return render(request,"entidades/clientes.html",contexto)
